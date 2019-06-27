@@ -18,7 +18,7 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_channel_access_token = 'FT9zaPscYQJbAQtWq4bHl1iM4Kpx7tHthvQZn4KcCj4eta1Nfq0T+jBpYxGtxPtrRrj3/GD6QLDCQxThjS52itajTMpnvsnJzRwuMj9xivIQIN1fkIEslMimIRNnyXF/heI7MCcCtpCNcbD2Y4EDewdB04t89/1O/w1cDnyilFU='
+line_channel_access_token = 'TioJy3Z69p9xCmG2RXgW1WNTDPQ0EEIbz2fM2786d8uMvl6WSIx+wWqobq8OEu3x0TzUxFUMo8Wi28uJUyxaoHlI7y1D3QO+UmXI0QDMmO5M/GFHe255Zh/zEk4VJcFqh1wYaObBthd4lhOiBsWD4gdB04t89/1O/w1cDnyilFU='
 line_bot_api = LineBotApi(line_channel_access_token)
 Authorization = "Bearer {}".format(line_channel_access_token)
 
@@ -51,8 +51,6 @@ def callback():
                 print("replying text:{}".format(text))
                 reply_menu(reply_token)
 
-    return '',200
-
 def reply_menu(reply_token):
     response = requests.post(
         url="https://api.line.me/v2/bot/message/reply",
@@ -63,39 +61,32 @@ def reply_menu(reply_token):
         data=json.dumps({
             "replyToken": str(reply_token),
             "messages": [{
-  "type": "template",
-  "altText": "this is a carousel template",
-  "template": {
-    "type": "carousel",
-    "actions": [],
-    "columns": [
-      {
-        "thumbnailImageUrl": "https://sv1.picz.in.th/images/2019/06/27/1CCpqZ.th.jpg",
-        "text": "weather",
-        "actions": [
-          {
-            "type": "message",
-            "label": "weather",
-            "text": "weather"
-          }
-        ]
-      },
-      {
-        "thumbnailImageUrl": "https://d3n8a8pro7vhmx.cloudfront.net/edonsw/pages/995/attachments/original/1386210667/green_energy_320.jpg",
-        "text": "energy",
-        "actions": [
-          {
-            "type": "message",
-            "label": "energy",
-            "text": "energy"
-          }
-        ]
-      }
-    ]
-  }
-}]
+                  "type": "template",
+                  "altText": "this is a buttons template",
+                  "template": {
+                    "type": "buttons",
+                    "actions": [
+                      {
+                        "type": "message",
+                        "label": "กรุงเทพ",
+                        "text": "Action 1"
+                      },
+                      {
+                        "type": "message",
+                        "label": "นครศรีธรรมราช",
+                        "text": "Action 2"
+                      }
+                    ],
+                    "thumbnailImageUrl": "https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009_640.png",
+                    "title": "ตรวจสอบอุณหภูมิ",
+                    "text": "กรุณาเลือกจังหวัด"
+                  }
+                }
+            ]
         })
     )
+
+
 
 if __name__ == "__main__":
     app.run()
